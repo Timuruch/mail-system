@@ -1,0 +1,69 @@
+//UNIX CORPORATE MAIL
+//Tymur Zenin 28.1.2025
+//First Edition of UCM Protocol Specification
+
+------------------------------------------------
+|						|
+|	PORTS USED BY PROTOCOL 			|
+|						|
+-------------------------------------------------
+
+DEF_LOG_PRT - 1024
+CMD_PRT_RANGE = from 2000 to 3000
+WK_PRT_RANGE = from 4000 to 5000
+
+
+
+
+username@ip - basic tocken of my mail
+
+so basically client after user wrote it up in it
+takes the ip out of the token and tries to connect
+to server (default port is 40), and after connection <----- Because of some restrictions 
+is estabilished, it asks if it has a user with this	    Port 40 is not used anymore
+username, if yes it locks in, and waits for the 	    instead port 1024 is.
+password (the server waits). 
+
+but person can dont use a command port, instead
+only ask if there is a mail, if not leave.
+
+Then after authentication is passed, it gives a 
+command port (100-700, CMD_PRT) which is used
+by a client and a server for Alert of Configuraion
+purposes (can be changed in future). If the server
+or client wants to send a file/mail/feedback 
+it makes a request (if client), or gives a work
+port (if server).
+
+Usually WK_PRT is from 1000 to 1700 to prevent
+with collisions with CMD_PRT.
+
+Example:
+	Client requests to send a mail to server:
+		C: RQ?		(REQUEST?)
+		S: WP 256 	(WORK PORT IS 256)
+		(then it is proceded on the other side)
+	
+	Server makes an annoucement: (the client should be ready to get new mail)
+		S: NM		(NEW MAIL)
+		C: WP?		(WORK PORT?)
+		S: WP 256	(WORK PORT IS 256)
+		(then it is procceded on the other port)
+
+Authentication Example:
+	Client connects to server:
+		C: LSRQ? 	(LOGIN SEARCH REQUEST?)
+		S: USNRQ 	(USERNAME REQUEST) //can say no auth needed, temp mail server
+					(your mail exists only when you are in,
+					but the problem everybody can use it)
+		C: USNM rdst 	(USERNAME IS rdst)
+		S: OK PSRQ 	(OK PASSWORD REQUEST) or also NO USR
+		C: PS 1234	(PASSWORD IS 1234)
+		S: OK		(OK)
+		C: NW?		(NEW MAIL?)
+		S: Y 1		(YES 1 NEW MAIL) or NO
+		C: CMDP?	(CMD_PRT?)
+		S: CP 256	(COMMAND PORT IS 256)
+		C: BYE		(CLOSURE OF CONN. WITH Server)
+		(end of transmission)
+
