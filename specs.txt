@@ -21,7 +21,7 @@ so basically client after user wrote it up in it
 takes the ip out of the token and tries to connect
 to server (default port is 40), and after connection <----- Because of some restrictions 
 is estabilished, it asks if it has a user with this	    Port 40 is not used anymore
-username, if yes it locks in, and waits for the 	    instead port 1024 is.
+username, if yes it locks in, and waits for the 	    instead port 4500 is.
 password (the server waits). 
 
 but person can dont use a command port, instead

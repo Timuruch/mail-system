@@ -44,7 +44,7 @@ int main() {
 	printf("Mail: %s\n", mail);
 	
 	network nm;
-	init_sock(&nm, ip_addr, 40);
+	init_sock(&nm, ip_addr, 4500);
 	cnct(&nm);
 	//send_txt(&nm, "Hello World!");
 	cls(&nm);
