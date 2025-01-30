@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct network network;
 
@@ -27,4 +28,4 @@ void cls(network* nm);
 
 void send_txt(network* nm, char* text);
 
-char* recieve(network* nm);
+void recieve(network* nm);

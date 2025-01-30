@@ -48,18 +48,12 @@ void cls(network* nm) {
 
 void send_txt(network* nm, char* text) {
 	int len = strlen(text);
-	//char buff[len];
-       	//strcpy(buff, text);	
-	
-	char buff[5] = { '1', '2', '3', '4', '5' };
 
-	send(nm->c_sock, buff, sizeof(buff), 0);
+	send(nm->c_sock, text, strlen(text), 0);
 }
 
-char* recieve(network* nm) {
-	char msg[256];
+void recieve(network* nm) {
+	char msg[256] = {0};
 	recv(nm->c_sock, msg, sizeof(msg), 0);
-	printf("%s", msg);
-	char* text = msg;
-	return text;
+	printf("%s\n", msg);
 }

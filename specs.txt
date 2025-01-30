@@ -8,9 +8,9 @@
 |						|
 -------------------------------------------------
 
-DEF_LOG_PRT - 1024
+DEF_LOG_PRT = 4500
 CMD_PRT_RANGE = from 2000 to 3000
-WK_PRT_RANGE = from 4000 to 5000
+WK_PRT_RANGE = from 5000 to 6000
 
 
 

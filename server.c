@@ -7,14 +7,13 @@ int main() {
 	lstn(&nm);
 	acpt(&nm);
 
-	char* text = recieve(&nm);
-	printf("%s", text);
+	recieve(&nm);
 
 	cls(&nm);
 	return 0;
 }
 
 //Plans
-//First add support for other ports,
+//fix problems with recieving text.
 //then add a support for mnemonic functions
 //first server then client

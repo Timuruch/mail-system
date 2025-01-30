@@ -46,7 +46,7 @@ int main() {
 	network nm;
 	init_sock(&nm, ip_addr, 4500);
 	cnct(&nm);
-	//send_txt(&nm, "Hello World!");
+	send_txt(&nm, "Hello World!");
 	cls(&nm);
 
 	return 0;
