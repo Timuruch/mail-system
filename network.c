@@ -14,8 +14,7 @@ void init_sock(network* nm, char* ip, int port){
 }
 
 void cnct(network* nm) {
-	//add here a check if not connected
-	if (nm->c_sock = connect(nm->s_sock, (struct sockaddr*)&nm->addr, nm->addrlen) != 0)
+	if (nm->c_sock = connect(nm->s_sock, (struct sockaddr*)&nm->addr, nm->addrlen) < 0)
 		perror("Error while connecting occured");
 	else
 		printf("No errors while connecting occured!\n");
@@ -47,13 +46,17 @@ void cls(network* nm) {
 }
 
 void send_txt(network* nm, char* text) {
-	int len = strlen(text);
-
-	send(nm->c_sock, text, strlen(text), 0);
+	printf("Text: %s\n", text);
+	int sd = send(nm->c_sock, text, strlen(text), 0);
+	perror("Error with send: ");
+	printf("Bytes sent: %d\n", sd);
 }
 
 void recieve(network* nm) {
-	char msg[256] = {0};
-	recv(nm->c_sock, msg, sizeof(msg), 0);
+	char msg[256] = { 0 };
+	int rd = recv(nm->c_sock, &msg, sizeof(msg), 0);
+//	int rd = read(nm->c_sock, msg, sizeof(msg)-1);
+	
+	printf("Read: %d\n", rd);
 	printf("%s\n", msg);
 }
