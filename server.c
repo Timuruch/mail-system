@@ -5,11 +5,13 @@ int main() {
 	network nm;
 	init_sock(&nm, "127.0.0.1", 4500);
 	lstn(&nm);
-	acpt(&nm);
+	int client = acpt(&nm);
 
-	recieve(&nm);
+	int a = sv_recv(client);
+	sv_send(client, "Hello Back!");
 
-	cls(&nm);
+	cls(a);
+	cls(nm.s_sock);
 	return 0;
 }
 

@@ -8,12 +8,18 @@
 #include <stdlib.h>
 
 typedef struct network network;
+typedef struct clients clients;
 
 struct network{
 	int s_sock;
-	int c_sock;
 	struct sockaddr_in addr;
 	socklen_t addrlen;
+};
+
+struct clients{
+	int clients[10];
+	int client;
+	int max_amount;
 };
 
 void init_sock(network* nm, char* ip, int port);
@@ -22,10 +28,16 @@ void cnct(network* nm);
 
 void lstn(network* nm);
 
-void acpt(network* nm);
+int acpt(network* nm);
 
-void cls(network* nm);
+void cls(int sockfd);
 
-void send_txt(network* nm, char* text);
+//Servrer talking functions
+void sv_send(int operator, char* text);
 
-void recieve(network* nm);
+int sv_recv(int operator);
+
+//Client talking functions
+void cl_send(network* nm, char* text);
+
+int cl_recv(network* nm);

@@ -14,7 +14,7 @@ void init_sock(network* nm, char* ip, int port){
 }
 
 void cnct(network* nm) {
-	if (nm->c_sock = connect(nm->s_sock, (struct sockaddr*)&nm->addr, nm->addrlen) < 0)
+	if (connect(nm->s_sock, (struct sockaddr*)&nm->addr, nm->addrlen) < 0)
 		perror("Error while connecting occured");
 	else
 		printf("No errors while connecting occured!\n");
@@ -32,31 +32,43 @@ void lstn(network* nm) {
 		printf("Listen sucsessful!\n");
 }
 
-void acpt(network* nm) {	
-	nm->c_sock = accept(nm->s_sock, (struct sockaddr*)&nm->addr, &nm->addrlen);
-	if(nm->c_sock == -1)
+int acpt(network* nm) {	
+	int client = accept(nm->s_sock, (struct sockaddr*)&nm->addr, &nm->addrlen);
+	if(client == -1)
 		perror("Error with accept");
 	else
 		printf("Accept succsessful!\n");
+	return client;
 }
 
-void cls(network* nm) {
-	close(nm->s_sock);
-	close(nm->c_sock);
+void cls(int sockfd) {
+	close(sockfd);
 }
 
-void send_txt(network* nm, char* text) {
-	printf("Text: %s\n", text);
-	int sd = send(nm->c_sock, text, strlen(text), 0);
-	perror("Error with send: ");
-	printf("Bytes sent: %d\n", sd);
+//Server talking functions
+void sv_send(int operator, char* text){
+	int sent = send(operator, text, strlen(text), 0);
+	if (sent < 0)
+		perror("Error 'sv_send()': ");
 }
 
-void recieve(network* nm) {
+int sv_recv(int operator){
 	char msg[256] = { 0 };
-	int rd = recv(nm->c_sock, &msg, sizeof(msg), 0);
-//	int rd = read(nm->c_sock, msg, sizeof(msg)-1);
-	
-	printf("Read: %d\n", rd);
-	printf("%s\n", msg);
+	int recieved = recv(operator, &msg, sizeof(msg), 0);
+	printf("Text: %s\n", msg);
+	return recieved;
+}
+
+//Client talking functions
+void cl_send(network* nm, char* text) {
+	int sd = send(nm->s_sock, text, strlen(text), 0);
+	if (sd < 0)
+		perror("Error 'cl_send()': ");
+}
+
+int cl_recv(network* nm) {
+	char msg[256] = { 0 };
+	int recieved = recv(nm->s_sock, &msg, sizeof(msg), 0);
+	printf("Text: %s\n", msg);
+	return recieved;
 }
