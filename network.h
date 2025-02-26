@@ -35,7 +35,7 @@ void cls(int sockfd);
 //Servrer talking functions
 void sv_send(int operator, char* text);
 
-int sv_recv(int operator);
+char* sv_recv(int operator);
 
 //Client talking functions
 void cl_send(network* nm, char* text);

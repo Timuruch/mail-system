@@ -46,7 +46,7 @@ int main() {
 	network nm;
 	init_sock(&nm, ip_addr, 4500);
 	cnct(&nm);
-	cl_send(&nm, "Hello World!");
+	cl_send(&nm, "LSRQ?");
 	
 	int a = cl_recv(&nm);
 

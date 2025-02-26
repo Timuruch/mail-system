@@ -52,11 +52,11 @@ void sv_send(int operator, char* text){
 		perror("Error 'sv_send()': ");
 }
 
-int sv_recv(int operator){
+char* sv_recv(int operator){
 	char msg[256] = { 0 };
-	int recieved = recv(operator, &msg, sizeof(msg), 0);
-	printf("Text: %s\n", msg);
-	return recieved;
+	recv(operator, &msg, sizeof(msg), 0);
+	char* buffer = msg;
+	return buffer;
 }
 
 //Client talking functions
