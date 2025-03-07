@@ -46,23 +46,21 @@ Example:
 	
 	Server makes an annoucement: (the client should be ready to get new mail)
 		S: NM		(NEW MAIL)
-		C: WP?		(WORK PORT?)
+		C: WPRQ		(WORK PORT?)
 		S: WP 256	(WORK PORT IS 256)
 		(then it is procceded on the other port)
 
 Authentication Example:
 	Client connects to server:
-		C: LSRQ? 	(LOGIN SEARCH REQUEST?)
-		S: USNRQ 	(USERNAME REQUEST) //can say no auth needed, temp mail server
-					(your mail exists only when you are in,
-					but the problem everybody can use it)
+		C: LSRQ		(LOGIN SEARCH REQUEST?)
+		S: USRQ 	(USERNAME REQUEST) 
 		C: USNM rdst 	(USERNAME IS rdst)
-		S: OK PSRQ 	(OK PASSWORD REQUEST) or also NO USR
+		S: PSRQ 	(OK PASSWORD REQUEST)
 		C: PS 1234	(PASSWORD IS 1234)
-		S: OK		(OK)
+		S: OK		(OK) or WRCD Wrong Credentials username or password is wrong
 		C: NW?		(NEW MAIL?)
-		S: Y 1		(YES 1 NEW MAIL) or NO
-		C: CMDP?	(CMD_PRT?)
+		S: YES 1	(YES 1 NEW MAIL) or NO
+		C: CMDP		(CMD_PRT?)
 		S: CP 256	(COMMAND PORT IS 256)
 		C: BYE		(CLOSURE OF CONN. WITH Server)
 		(end of transmission)

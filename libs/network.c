@@ -1,4 +1,4 @@
-#include "network.h"
+#include "../headers/network.h"
 
 void init_sock(network* nm, char* ip, int port){
 	nm->s_sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -66,9 +66,9 @@ void cl_send(network* nm, char* text) {
 		perror("Error 'cl_send()': ");
 }
 
-int cl_recv(network* nm) {
+char* cl_recv(network* nm) {
 	char msg[256] = { 0 };
-	int recieved = recv(nm->s_sock, &msg, sizeof(msg), 0);
-	printf("Text: %s\n", msg);
-	return recieved;
+	recv(nm->s_sock, &msg, sizeof(msg), 0);
+	char* buffer = msg;
+	return buffer;
 }

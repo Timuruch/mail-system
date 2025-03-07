@@ -40,4 +40,4 @@ char* sv_recv(int operator);
 //Client talking functions
 void cl_send(network* nm, char* text);
 
-int cl_recv(network* nm);
+char* cl_recv(network* nm);
