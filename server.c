@@ -17,8 +17,11 @@ int main() {
 
 	cl.is_conn = 1;
 
-	while (cl.is_conn)
-		sv_send(cl.client_sock, check_coms(sv_recv(cl.client_sock), &cl));
+	while (cl.is_conn){
+		char* text = sv_recv(cl.client_sock);
+		printf("C: %s\n", text);
+		sv_send(cl.client_sock, check_coms(text, &cl));
+	}
 	
 	cls(cl.client_sock);
 	cls(nm.s_sock);
